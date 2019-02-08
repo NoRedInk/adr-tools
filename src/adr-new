@@ -48,6 +48,13 @@ eval "$($(dirname $0)/adr-config)"
 ##
 ##     adr new -s 3 -s 4 -l "5:Amends:Amended by" Use Riak CRDTs to cope with scale
 ##
+## Environment variables:
+##
+## ADR_FILENAME_FORMAT
+##                 If specified, its value is used to format the basename of the new
+##                 ADR.  The ".md" extension is added to construct the final filename.
+##                 Defaults to "%04d-%s".  Arguments are ADR number and hyphenated
+##                 ADR title.  The order of arguments cannot be changed.
 
 superceded=()
 links=()
@@ -99,9 +106,10 @@ else
     newnum=1
 fi
 
-newid=$(printf "%04d" $newnum)
+format=${ADR_FILENAME_FORMAT:-"%04d-%s"}
 slug=$(echo -n $title | tr -Ccs [:alnum:] - | tr [:upper:] [:lower:] | sed -e 's/[^[:alnum:]]*$//' -e 's/^[^[:alnum:]]*//')
-dstfile=$dstdir/$newid-$slug.md
+basename=$(printf $format $newnum $slug)
+dstfile=$dstdir/$basename.md
 date=${ADR_DATE:-$(date +%Y-%m-%d)}
 
 mkdir -p $dstdir

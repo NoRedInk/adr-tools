@@ -1,0 +1,4 @@
+ADR_FILENAME_FORMAT="%d-%s" adr new First Record
+doc/adr/1-first-record.md
+ls doc/adr
+1-first-record.md
