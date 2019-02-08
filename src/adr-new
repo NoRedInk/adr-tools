@@ -50,6 +50,9 @@ eval "$($(dirname $0)/adr-config)"
 ##
 ## Environment variables:
 ##
+## ADR_TEMPLATE    If specified, its value is used as the template file in favor of
+##                 local of builtin templates.
+##
 ## ADR_FILENAME_FORMAT
 ##                 If specified, its value is used to format the basename of the new
 ##                 ADR.  The ".md" extension is added to construct the final filename.
